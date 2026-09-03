@@ -50,6 +50,8 @@ Every requirement, constraint, and acceptance criterion in `spec.md` carries a p
 
 This isn't a new file format requirement on top of `spec.md` — it's a convention applied within its existing structure (e.g., an inline tag after each requirement or acceptance-criterion line), consistent with the still-open question of how structured `spec.md`'s format ultimately needs to be.
 
+**Sibling concept — level tags.** [`front-of-flow.md`](../front-of-flow.md) (v0.5) adds a second per-requirement tag on a separate axis: the precision *level* (L1 business / L2 product / L3 architect / L4 senior dev) a requirement sits at. Provenance says how solid a requirement is; level says how precise it is. Both are per-requirement, applied the same way within `spec.md`'s structure.
+
 ## Inputs
 
 - Scoped ask (from the Scoping Agent), checked against the minimum intake scaffold above

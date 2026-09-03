@@ -121,6 +121,8 @@ Each agent's sub-doc below works out what "known," "safe," "unknown," and "risky
 
 ## Requirement Change Management
 
+> **Refined thinking on this topic lives in [`requirement-change-handling.md`](requirement-change-handling.md)** (v0.5) — it adds dimensions beyond blast radius (timing, reversibility, urgency), replaces the halt-vs-continue binary with a three-response model, and works through how agentic execution changes the calculus. The policy below is the earlier single-story version, kept here until that thinking is integrated.
+
 `spec.md` is the pipeline's source of truth, but that only means something if there's a defined answer to what happens when it changes — which nothing above addresses yet. Requirements changing mid-pipeline is common in practice, not an edge case, so this needs an explicit policy rather than an implicit one.
 
 **Versioning.** Any proposed change to `spec.md` after the Requirements Sign-off gate (step 4) is a change request, not a silent edit. The spec is versioned (`spec.md@v2`, not an overwrite of `v1`), and every downstream artifact (`design.md`, `task-graph.json`, diffs, test reports) records which spec version it was built against — so drift is always detectable rather than discovered later.
@@ -135,6 +137,17 @@ Each agent's sub-doc below works out what "known," "safe," "unknown," and "risky
 **Who decides the classification.** The Intake Agent proposes a classification with its reasoning (what changed, what it invalidates); the human at the relevant re-approval gate confirms or overrides it. This keeps classification itself inside the autonomy framework above — a clear-cut clarification is Known+Safe and agent-classified without friction, while an ambiguous case defaults to a human call rather than the agent guessing at its own blast radius.
 
 **Downstream of merge.** A requirement gap discovered *after* release (step 12+) is not a change request against the same spec — it's a new opportunity or incident, entering at step 1 (Opportunity Identification) or step 14 (Incident Response) depending on whether it's a missed requirement or a production defect. The spec that shipped stays the historical record of what was actually approved and built.
+
+## Front of the Flow (v0.5 evolution — not yet reflected in the diagram above)
+
+The diagram treats "an ask" as a single unit flowing from Scoping (step 2) straight into per-story Intake (step 3). [`front-of-flow.md`](front-of-flow.md) works out a richer front section that isn't drawn here yet:
+
+- **Requirement levels (L1–L4).** Business / product / architect / senior-dev precision levels; each requirement is tagged with its level so the system knows how much translation is needed and who signs off. Translation is bidirectional (the diagram only shows downward).
+- **Artifact chain.** Business brief (L1) → product definition (L2, validated back with the business) → solution spec (L3, initiative and/or feature) → story specs. Derived and versioned, not hand-maintained parallel docs.
+- **Initiative → Feature → Story hierarchy.** Feature is the unit of merge. A high-level solution is agent-drafted and human-signed *before* story breakdown — a **third human gate**, alongside Requirements Sign-off (4) and Merge / Release Approval (10).
+- **Fan-out.** Steps 1–2 plus solution analysis run per initiative (and per feature); steps 3–13 run per story. The existing Design step (5) becomes per-story/per-feature elaboration *within* the signed solution.
+
+Integrating this into the diagram, the step reference table, and the per-agent docs is pending — it needs the merge/release questions resolved first (see the follow-up list in `front-of-flow.md`).
 
 ## Agent & Gate Directory
 
