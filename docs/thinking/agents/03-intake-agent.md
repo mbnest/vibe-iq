@@ -33,11 +33,14 @@ When Intake identifies a gap, it classifies what *kind* of gap it is before deci
 | Non-functional requirement | Expected scale, latency, availability target | A technical stakeholder, not the business submitter |
 | Compliance / legal constraint | Data handling, regulatory obligation | Compliance/legal owner |
 | Existing-system behavior | Current SLA, established pattern, prior design decision | Brownfield/MCP context first (see below) — often answerable without asking a person at all |
+| Existing infra/architecture state | Current provisioned resources, spare capacity, whether the ask needs new cloud or extends what's already there | Brownfield infra inventory cascade (see below) — repo Terraform state, then a direct cloud-API query |
 | Genuinely unknown | Nobody currently in the loop has the answer | Flagged `[unresolved]` and carried forward as visible risk — never silently defaulted |
 
 ### Brownfield context as an intake source, not only an implementation source
 
 The DX brownfield/MCP dependency (flagged as unconfirmed in the master diagram's External Dependency Status) has a second use beyond supplying the Implementation Agent with codebase context: it can answer intake-time questions the business/product submitter was never positioned to answer — current behavior, existing constraints, patterns already encoded in the system. Where this dependency exists and is reachable, Intake queries it before escalating a gap to a human, and tags what it finds `[inferred]` (see below).
+
+**Brownfield infra context is a separate dependency from brownfield code context.** "What does the system currently do" (code/MCP) and "what infrastructure already exists for it" (Terraform/cloud) are different questions with different sources, tracked as separate rows in the External Dependency Status table. For infra facts, Intake checks repo-local Terraform state first, then queries the cloud provider directly if the ask's infra isn't covered there. A CMDB fallback is explicitly parked for MVP — may not ship at all — so an ask whose infra state can't be resolved by that cascade is `[unresolved]`, not silently treated as needing greenfield infra.
 
 ## Provenance Tagging
 
@@ -56,6 +59,7 @@ This isn't a new file format requirement on top of `spec.md` — it's a conventi
 
 - Scoped ask (from the Scoping Agent), checked against the minimum intake scaffold above
 - Existing system/brownfield context (e.g., via codebase MCP servers, where reachable)
+- Existing infra inventory, where the ask touches infrastructure (repo Terraform state → cloud-API cascade; CMDB parked, not part of the MVP cascade)
 - Responses from whichever stakeholder a gap was routed to (business, technical, or compliance)
 
 ## Outputs

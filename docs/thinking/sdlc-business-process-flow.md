@@ -25,6 +25,7 @@ flowchart TD
     subgraph EXT["External capabilities this pipeline depends on — existence &amp; maturity unconfirmed"]
         direction TB
         EXT_MCP["DX brownfield context<br/>MCP servers over codebases"]
+        EXT_INFRA["Brownfield infra inventory<br/>repo Terraform state → cloud API<br/>(CMDB: parked, may not ship)"]
         EXT_TF["Cloud Build / Terraform enabler<br/>infra provisioning"]
         EXT_QT["Quality &amp; Testing enabler<br/>test execution &amp; specialized testing"]
         EXT_DQ["Data Quality enabler<br/>data quality tooling"]
@@ -40,6 +41,9 @@ flowchart TD
 
     EXT_MCP -.->|"brownfield context"| S3
     EXT_MCP -.->|"brownfield context"| S7
+    EXT_INFRA -.->|"infra state"| S3
+    EXT_INFRA -.->|"infra state, new-vs-extend"| S5
+    EXT_INFRA -.->|"catalog-vs-novel signal"| S11
     S11 -.->|"novel-path ticket, full context"| EXT_TF
     S11 -.->|"novel-path ticket, full context"| EXT_QT
     S11 -.->|"novel-path ticket, full context"| EXT_DQ
@@ -62,7 +66,7 @@ flowchart TD
 
     class S1,S2,S3,S5,S6,S7,S8,S9,S11,S12,S13 agent;
     class G1,G2 gate;
-    class EXT_MCP,EXT_TF,EXT_QT,EXT_DQ,EXT_CICD external;
+    class EXT_MCP,EXT_INFRA,EXT_TF,EXT_QT,EXT_DQ,EXT_CICD external;
     class S14,S15,S16 ops;
 ```
 
@@ -75,6 +79,7 @@ Fill this in as each capability is actually confirmed — the point of separatin
 | Capability | Feeds | Assumed status | If confirmed missing |
 |---|---|---|---|
 | DX brownfield context (MCP servers over codebases) | Intake Agent (3), Implementation Agent(s) (7) | Assumed to exist; maturity and integration effort not yet assessed | Intake and Implementation lose brownfield context — every ask is effectively treated as greenfield until this is built |
+| Brownfield infra inventory (repo Terraform state → cloud-provider API cascade) | Intake Agent (3, current-state facts for NFRs), Design Agent (5, new-vs-extend decision), Enablement Agent (11, catalog-vs-novel signal) | **Decided (2026-09-04): scope stops at direct cloud-API query.** Repo-local Terraform state is checked first; if the ask's infra isn't covered there, query the cloud provider directly (e.g. AWS Config / Resource Explorer). A CMDB fallback is explicitly parked and may not ship at all — CMDB accuracy in practice is unconfirmed and untrustworthy enough that requiring one would block MVP scope on an unreliable system of record | If neither repo IaC nor a direct cloud-API query resolves it: same handling as a genuinely-unknown Intake gap — flagged `[unresolved]` and escalated to a human infra owner, never silently assumed greenfield. Design cannot pre-classify new-vs-extend work in that case |
 | Cloud Build / Terraform enabler | Enablement Agent (11), novel path | Assumed to exist as a ticket-fulfilled team | Novel-path infra requests have nowhere to route — becomes a build item for this platform, or an escalation |
 | Quality & Testing enabler | Enablement Agent (11), novel path — specialized testing categories (compliance, UAT, penetration testing) | Assumed to exist as a ticket-fulfilled team | Those testing categories have no home; either the Test Agent's scope expands or this becomes a build item |
 | Data Quality enabler | Enablement Agent (11), novel path | Assumed to exist as a ticket-fulfilled team | Data quality tooling becomes a build item |

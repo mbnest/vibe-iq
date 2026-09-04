@@ -9,6 +9,7 @@ Turn an approved spec into a technical design ready for planning.
 ## Inputs
 
 - `spec.md`
+- Existing infra inventory, where the ask touches infrastructure — repo Terraform state → cloud-API cascade (see External Dependency Status in [`../sdlc-business-process-flow.md`](../sdlc-business-process-flow.md)); needed to decide new-vs-extend rather than designing blind to what's already provisioned
 
 ## Outputs
 
@@ -38,6 +39,7 @@ Turn an approved spec into a technical design ready for planning.
 - Design implies new external exposure or a new data classification
 - Failure modes of the proposed architecture are not well understood
 - Design touches infrastructure shared by other teams/verticals
+- Existing infra state can't be determined (no repo IaC, no reachable cloud-API answer) — the new-vs-extend call can't be made autonomously and routes to a human infra owner
 
 ## Handoffs
 
