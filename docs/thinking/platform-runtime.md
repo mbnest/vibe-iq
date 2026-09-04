@@ -101,6 +101,23 @@ Both MVP agents — Intake and Design — are deep-reasoning stages. Run both on
 
 ---
 
+## Part 4 — Interface: CLI vs. web, and per-step interaction
+
+*Working notes, 2026-09-04. Summary of a conversation between Matt and Claude on how users actually reach the platform, and what it means to work with a single step instead of the whole pipeline. Draft, not a mandate.*
+
+**CLI vs. web — not either/or, sequenced by need.**
+
+- **CLI first.** The MVP already runs as a skill/prompt-loop on the Claude Agent SDK ([architecture-napkin.md](architecture-napkin.md)), which is CLI-native, and the MVP's single reviewer is technical. Building a web UI before a non-technical signer needs one solves a problem that doesn't exist yet — same discipline already applied to skipping an orchestrator for MVP.
+- **Web becomes necessary the moment an L1/L2 signer (Business/Product, per the persona levels in [front-of-flow.md](front-of-flow.md)) has to use a gate.** They won't open a terminal — this is a hard constraint, not a preference.
+- **Treat CLI and web as two clients of one interaction contract**, not two builds: read artifact / propose revision / approve / reject / comment. The per-audience view-rendering stage already in the model-selection table above is what adapts one underlying artifact to each surface and persona, so the contract doesn't fork per client.
+
+**Working with a single step, mid-flight** — e.g. a reviewer spots a gap in `spec.md` before requirements sign-off and wants to fix it without touching the rest of the pipeline.
+
+- This is already implied by the MVP path: "Intake agent → `spec.md` → requirements sign-off (**change-request loop, no direct human edits**) → Design agent" ([architecture-napkin.md](architecture-napkin.md)). The reviewer talks to that step's agent about the gap; the agent revises the artifact. It's naturally scoped to one step because each agent is `inputs -> artifact` in isolation.
+- **This is not the [requirement-change-handling.md](requirement-change-handling.md) framework.** That governs changes discovered *after* a gate has already passed or work has been built. Catching a gap before sign-off is ordinary gate review — keep the line clear so a pre-approval tweak doesn't get routed through blast-radius/classification machinery it doesn't need.
+- **On CLI this needs no new capability.** A reviewer in a Claude Code/Agent SDK session is already chatting with that step's agent — fixing the gap is just the next turn.
+- **On web it does need building:** a chat panel scoped to one artifact and one step's agent, next to the approve/reject controls. Structurally this is the same conversational-grounding pattern as the [project-twin](project-twin.md) — a chat interface anchored in project state — just narrowed from "the whole backlog" to "this one artifact." Worth treating as the same mechanism at two scopes rather than building it twice.
+
 ## ADR flags (not decided yet)
 
 - **ADR-0004 — Orchestration substrate.** Revisit when: front-of-flow build starts, or a multi-day workflow is needed.
@@ -113,5 +130,7 @@ Both MVP agents — Intake and Design — are deep-reasoning stages. Run both on
 - Is the Claude Agent SDK the right harness for these agents, or a plain Tool Runner loop? (SDK gives built-in file/bash tools; the agents are file-heavy, so probably yes.)
 - For Implementation, what decides which task-graph nodes escalate from Sonnet to Opus — a governance rule on node novelty/risk?
 - Batch vs. interactive boundary — Signal and story-generation are batchable; does the MVP even have them? (No — deferred.)
+- When does the web UI concretely become necessary — first non-technical (L1/L2) signer, or earlier?
+- Should the gate-scoped, single-step chat panel and the project twin share an implementation, given they're the same conversational-grounding pattern at different scopes (one artifact vs. the whole backlog)?
 
 *Status: new 2026-09-04. Not reviewed. Orchestration and hosting are deferred for the MVP; the model-selection table is a starting hypothesis to test against real runs, not a commitment.*

@@ -40,20 +40,7 @@ Matt's initial framing was a two-path model (halt-and-re-solution vs. deliver-th
 
 ## Chat-based intake channel (the "project twin") — post-MVP
 
-*Idea surfaced 2026-09-04, not scheduled — candidate for after the MVP, not before. A conversational agent, aware of project status via the backlog/artifact store and codebase, that stakeholders and product talk to directly. Relevant here as one possible answer to "where do change signals enter."*
-
-**Leaning, not yet decided:**
-
-- The twin does not classify or decide. It captures the raw signal plus provenance (which initiative/feature/story it targets) and hands the reasoning off to the impact/classification agent already described above — same division of labor as any other entry channel.
-- **Approval split:** product holds final decision authority (they own the backlog and are accountable for it). The requestor gets exactly one confirm-type approval — confirming the twin captured their intent correctly — not a second decision gate. Product is made aware of the change and its status regardless of timing, so they can act on the three responses whenever they choose to.
-- The twin is a notification/conversation surface, not the system of record. Status, linkable/dependent requests, and approvals live in the backlog/artifact store it already reads (see [`architecture-napkin.md`](architecture-napkin.md)) — not a separate ticketing system bolted on the side.
-- Motivating scenario: a story reaches UAT; the twin tells the stakeholder it's ready; they raise a layout/functionality/new-rule change; the twin captures it with provenance and routes it into the flow above rather than becoming a side-channel Slack thread.
-
-**Still open:**
-
-- Sync vs. async mechanics — whether requestor and product are notified concurrently or sequentially, and what resolves a disagreement between "requestor confirms intent" and "product declines the change" (leaning: product's call, since it's a different kind of approval, but not committed).
-- What blocks while waiting on an async approval — the affected subgraph only, or more.
-- Concrete shape of the notices the twin sends (e.g. "this is ready for you to review," "we built a formal intake form for you," "this hit a roadblock on X," "the team needs you to answer Y") and how much friction each can carry before people route around it.
+Idea surfaced 2026-09-04, not scheduled — candidate for after the MVP, not before. One possible answer to "where do change signals enter": a conversational agent that captures stakeholder feedback (e.g. during UAT) with provenance and hands it to the impact/classification agent above, rather than a side-channel Slack thread. Full concept, functionality, and open items now live in their own doc: [`project-twin.md`](project-twin.md).
 
 ## Open questions for the dedicated session
 
