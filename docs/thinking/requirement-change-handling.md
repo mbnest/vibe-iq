@@ -38,10 +38,27 @@ Matt's initial framing was a two-path model (halt-and-re-solution vs. deliver-th
   - **level + provenance tags plus the artifact chain's upward traceability** let a change to an L1 need automatically flag every derived L2/L3/L4 artifact as stale.
 - **Who does what:** an agent computes the impact (affected subgraph + stale artifacts + a proposed classification); a human confirms the classification and picks the response — consistent with the autonomy framework (agent proposes, human decides anything above a clarification).
 
+## Chat-based intake channel (the "project twin") — post-MVP
+
+*Idea surfaced 2026-09-04, not scheduled — candidate for after the MVP, not before. A conversational agent, aware of project status via the backlog/artifact store and codebase, that stakeholders and product talk to directly. Relevant here as one possible answer to "where do change signals enter."*
+
+**Leaning, not yet decided:**
+
+- The twin does not classify or decide. It captures the raw signal plus provenance (which initiative/feature/story it targets) and hands the reasoning off to the impact/classification agent already described above — same division of labor as any other entry channel.
+- **Approval split:** product holds final decision authority (they own the backlog and are accountable for it). The requestor gets exactly one confirm-type approval — confirming the twin captured their intent correctly — not a second decision gate. Product is made aware of the change and its status regardless of timing, so they can act on the three responses whenever they choose to.
+- The twin is a notification/conversation surface, not the system of record. Status, linkable/dependent requests, and approvals live in the backlog/artifact store it already reads (see [`architecture-napkin.md`](architecture-napkin.md)) — not a separate ticketing system bolted on the side.
+- Motivating scenario: a story reaches UAT; the twin tells the stakeholder it's ready; they raise a layout/functionality/new-rule change; the twin captures it with provenance and routes it into the flow above rather than becoming a side-channel Slack thread.
+
+**Still open:**
+
+- Sync vs. async mechanics — whether requestor and product are notified concurrently or sequentially, and what resolves a disagreement between "requestor confirms intent" and "product declines the change" (leaning: product's call, since it's a different kind of approval, but not committed).
+- What blocks while waiting on an async approval — the affected subgraph only, or more.
+- Concrete shape of the notices the twin sends (e.g. "this is ready for you to review," "we built a formal intake form for you," "this hit a roadblock on X," "the team needs you to answer Y") and how much friction each can carry before people route around it.
+
 ## Open questions for the dedicated session
 
 - How the three-response model maps onto the initiative/feature/story fan-out — a change can hit the initiative solution, one feature, or one story, and the response differs.
 - Does a material change reopen the solution sign-off gate, or only the affected feature's solution?
-- What "fast automatic detection" concretely requires — where change signals enter (ticket edits, stakeholder messages, new asks that overlap in-flight work).
+- What "fast automatic detection" concretely requires — where change signals enter (ticket edits, stakeholder messages, new asks that overlap in-flight work, **or the chat-based intake channel above**).
 - Whether the four-class taxonomy (clarification / additive / material / fundamental) survives as the classification, feeds the three-response choice, or is replaced.
 - Real-world adoption: what makes the in-system change path lower-friction than a side channel.
