@@ -1,4 +1,4 @@
-# Vibe Engineering Platform — Original Architecture Notes
+# VibeIQ — Original Architecture Notes
 
 **Historical record. Retired as the active index (2026-09-05).** This file was the running journal of the pre-planning conversation (v0.1–v0.8). Its content has been promoted into the structured docs:
 

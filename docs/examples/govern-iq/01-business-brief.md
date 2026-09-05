@@ -4,7 +4,7 @@
 
 **Source note, read before anything else:** unlike the previous (now replaced) dance-studio brief, there is no direct sponsor statement behind this one. The subject matter is the `govern-iq` project — a sibling repo at `govern-iq/thnking/` containing an already-fairly-detailed technical architecture for an agentic data-quality system (orchestrator, profiler, rule-author, governance, rule-registrar, issue-register, and metadata-inference agents). This brief is *reverse-translated* from that L3-ish material back up to L1 business language — the harder, less-supported direction the platform's own notes flag as underdeveloped ([front-of-flow.md](../../architecture/front-of-flow.md): "the current pipeline only does downward translation… the pipeline barely does this today"). Treat it as a stand-in for a sponsor conversation that hasn't actually happened, not as a confirmed need.
 
-Two projects are in play here and should not be conflated: **govern-iq** is the *product* this brief is about — the thing being specified. The vibe-engineering-platform's front-of-flow chain (this artifact and the ones after it) is the *process* being used to spec it.
+Two projects are in play here and should not be conflated: **govern-iq** is the *product* this brief is about — the thing being specified. VibeIQ's front-of-flow chain (this artifact and the ones after it) is the *process* being used to spec it.
 
 ## Sponsor
 

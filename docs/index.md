@@ -1,5 +1,5 @@
 ---
-title: Vibe Engineering Platform
+title: VibeIQ
 ---
 
 Every enterprise has a "right way" to ship software — how requirements get clarified, how

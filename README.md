@@ -1,4 +1,4 @@
-# Vibe Engineering Platform
+# VibeIQ
 
 Encode an organization's SDLC golden paths once, centrally, as a spec-driven pipeline of agents with real human gates — so every business vertical inherits them automatically instead of re-learning how to invoke every other platform team's tooling. The platform's value is orchestration and composition, not reimplementation.
 

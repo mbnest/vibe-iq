@@ -9,7 +9,7 @@ This directly resolves the "what is the first feature" prerequisite in [`../../d
 ## Two projects, not one
 
 - **govern-iq** — a sibling repo (`govern-iq/thnking/`) containing an already-detailed technical architecture for an agentic data-quality system (orchestrator, profiler, rule-author, governance, rule-registrar, issue-register, metadata-inference agents). This is the *product* the chain below is specifying.
-- **vibe-engineering-platform** (this repo) — the SDLC pipeline/process being exercised by running govern-iq through it. The chain artifacts live here, not in govern-iq's own repo, because they're process output, not product source.
+- **vibe-iq** (this repo) — the SDLC pipeline/process being exercised by running govern-iq through it. The chain artifacts live here, not in govern-iq's own repo, because they're process output, not product source.
 
 ## Why govern-iq instead of the dance studio
 

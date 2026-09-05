@@ -1,4 +1,4 @@
-# Vibe Engineering Platform — Overview
+# VibeIQ — Overview
 
 *The whole idea in one read. For detail, follow the links; for the reasoning trail, see [`notes/`](notes/). Everything here is a working position from pre-planning, not a reviewed or committed design.*
 
