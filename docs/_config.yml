@@ -1,0 +1,10 @@
+title: Vibe Engineering Platform
+description: >-
+  Encode an organization's SDLC golden paths once — as a governed pipeline of AI
+  agents with real human sign-off gates — so every business unit inherits them.
+theme: jekyll-theme-cayman
+show_downloads: false
+
+# .md links between docs are rewritten to .html at build time
+plugins:
+  - jekyll-relative-links
