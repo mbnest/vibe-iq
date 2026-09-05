@@ -129,6 +129,14 @@ The existing Design step (5) becomes the per-story / per-feature elaboration *wi
 
 ---
 
+## Part 4 — The Definition Agent (added 2026-09-05)
+
+The L1→L2 hop now has a specced agent: the [**Definition Agent**](agents/definition-agent.md). It owns the transform *business brief → product definition* — the mirror-back (fidelity, stakeholder-signed) plus the augmentation (product-introduced requirements, NFRs, targets, feature breakout; product-attested). Naming follows the platform convention: agents are named for the transform they own, not the persona they serve.
+
+- **13 phase decisions** are recorded in [`product-definition-phase-open-questions.md`](product-definition-phase-open-questions.md) — artifact structure (structured records), freeze semantics (load-bearing forks block; metric targets must be filled), autonomy (publish safe, flag risky), the approval loop (product commits, then all affected stakeholders sign the mirror-back), and more.
+- **Autonomy demarcation** — a per-function breakdown of what the agent can reason on now, what needs data access (strategy corpus, historical actuals, analytics, CRM, the [Project Twin](project-twin.md), the platform's own accumulated history), and what stays permanently human (the portfolio / ambition / budget decisions). Decision rights never transfer with data.
+- **Integration possibilities** — [`product-definition-integration-options.md`](product-definition-integration-options.md) works through fitting alongside existing enterprise product tooling: separate the flow-contract from the implementation, define swappable ports, keep a sidecar metadata graph so the derivation chain survives wherever the content lives.
+
 ## Follow-up questions (deliberately unresolved)
 
 **Front-of-flow:**
@@ -136,8 +144,8 @@ The existing Design step (5) becomes the per-story / per-feature elaboration *wi
 - Does feature-level solutioning always happen, or only above some initiative size?
 - Does solution analysis run once (initiative) or twice (initiative + feature)?
 - What exactly is the solution reviewer signing — "this is the *right* solution" or "this is a *sound* solution, proceed"?
-- Where does the product function sit — inside the platform (agent) or outside (human) — and does that vary with each vertical's product coverage? Does the existing "prioritization is a non-goal" position soften to "draft, don't decide"?
-- How structured does each artifact need to be underneath its prose (enumerable, ID'd requirements vs. prose alone)? Ties to the existing "what does declarative mean" open question in the companion notes.
+- ~~Where does the product function sit — inside the platform (agent) or outside (human)?~~ **Partly resolved (2026-09-05):** the L1→L2 *definition* work is an agent (the [Definition Agent](agents/definition-agent.md)); the *prioritization decision* stays with a human (Scoping + product function). The "prioritization is a non-goal" position softens to "the agent drafts, a human decides" for prioritization, ROI, and portfolio calls — see the autonomy demarcation in the agent doc. Whether this varies with each vertical's product coverage is still open.
+- How structured does each artifact need to be underneath its prose (enumerable, ID'd requirements vs. prose alone)? **For the product definition, resolved (2026-09-05): structured requirement records** (open-questions Q1). Still open for the other artifacts. Ties to the "what does declarative mean" open question in the companion notes.
 
 **Merge and release (parked — for a later session):**
 - Is there a feature-level sign-off gate in addition to the initiative-level one?
@@ -149,4 +157,4 @@ The existing Design step (5) becomes the per-story / per-feature elaboration *wi
 
 ---
 
-*Doc status: new in this session (2026-09-03). Not reviewed by anyone else. The diagram in [`sdlc-business-process-flow.md`](sdlc-business-process-flow.md) does not yet reflect the initiative/feature/story fan-out or the solution gate — that integration is pending. Best next step is probably resolving the term ("level" vs "altitude") and the feature-layer questions, or moving on to merge/release as its own topic.*
+*Doc status: created 2026-09-03; Part 4 and the Definition Agent added 2026-09-05. Not reviewed by anyone else. The diagram in [`sdlc-business-process-flow.md`](sdlc-business-process-flow.md) does not yet reflect the initiative/feature/story fan-out, the solution gate, or the Definition Agent — that integration is pending. Best next step is probably folding the Definition Agent into the master diagram + step reference, then resolving the term ("level" vs "altitude") and the feature-layer questions.*

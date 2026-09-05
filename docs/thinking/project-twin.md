@@ -44,6 +44,10 @@ A story or feature reaches UAT. The twin tells the stakeholder it's ready to rev
 - Requestor gets exactly one confirm-type approval: did the twin capture their intent correctly. Not a decision gate.
 - Product holds final decision authority — they own the backlog and are accountable for it — and is made aware of the change and its status regardless of timing, so they can decide whenever they choose to.
 
+## Related: the Definition Agent's chat sidekick (2026-09-05)
+
+The [Definition Agent](agents/definition-agent.md)'s product-definition form has a **chatbot sidekick** scoped to one artifact and one field at a time — the same conversational-grounding pattern as the twin, at the narrowest scope (one field, not one artifact, not the whole backlog). Decision there: the sidekick may write to form fields directly, with the user confirming on submit. Worth keeping the twin, the gate-scoped single-step chat panel ([platform-runtime.md](platform-runtime.md) Part 4), and this field-scoped sidekick as one mechanism at three scopes rather than three builds.
+
 ## Open items
 
 1. **Sync vs. async notification mechanics.** Whether requestor and product are notified concurrently or sequentially by default; not decided.

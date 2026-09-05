@@ -42,6 +42,17 @@ Matt's initial framing was a two-path model (halt-and-re-solution vs. deliver-th
 
 Idea surfaced 2026-09-04, not scheduled — candidate for after the MVP, not before. One possible answer to "where do change signals enter": a conversational agent that captures stakeholder feedback (e.g. during UAT) with provenance and hands it to the impact/classification agent above, rather than a side-channel Slack thread. Full concept, functionality, and open items now live in their own doc: [`project-twin.md`](project-twin.md).
 
+## Front-of-flow update (2026-09-05) — the request / change_request model
+
+Discussion on the product-definition phase settled part of this for the *front* of the flow (see [`agents/definition-agent.md`](agents/definition-agent.md) and [`product-definition-phase-open-questions.md`](product-definition-phase-open-questions.md)):
+
+- **`request` and `change_request` are one table** with a type discriminator. An `initial` request spawns product-definition v1; a `change_request` (FK to the original request, plus which version it supersedes) spawns v2, v3… Every artifact version points to exactly one cause row.
+- **Two distinct lines, not one:**
+  - **Product-definition sign-off (freeze)** decides whether a modification is *draft churn* (no record — the definition loop is still running) or a *change request* (gets a `change_request` row, because an approved artifact others rely on is being altered).
+  - **Solution sign-off** decides how that change request is *processed*: cheap path (re-run the definition loop, redo the solution draft — nothing else is built yet) vs. expensive path (the three-response model above — absorb / halt-and-re-solution / deliver-then-refactor).
+- The record is created *earlier* than the expensive flow engages. The gap between the two sign-offs is real and cheap to handle — don't collapse the lines.
+- This answers, for the initiative artifact, one of the questions below: **a change after solution sign-off is what triggers blast-radius classification; a change before it does not.** The feature-level equivalent is still open.
+
 ## Open questions for the dedicated session
 
 - How the three-response model maps onto the initiative/feature/story fan-out — a change can hit the initiative solution, one feature, or one story, and the response differs.

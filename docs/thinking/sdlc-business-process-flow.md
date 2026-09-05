@@ -149,6 +149,7 @@ The diagram treats "an ask" as a single unit flowing from Scoping (step 2) strai
 
 - **Requirement levels (L1–L4).** Business / product / architect / senior-dev precision levels; each requirement is tagged with its level so the system knows how much translation is needed and who signs off. Translation is bidirectional (the diagram only shows downward).
 - **Artifact chain.** Business brief (L1) → product definition (L2, validated back with the business) → solution spec (L3, initiative and/or feature) → story specs. Derived and versioned, not hand-maintained parallel docs.
+- **Definition Agent (L1→L2).** The product-definition phase now has a specced agent — [`agents/definition-agent.md`](agents/definition-agent.md) — sitting between Scoping (2) and per-story Intake (3). It owns the mirror-back (stakeholder-signed) plus product-introduced requirements/NFRs/targets/feature-breakout (product-attested). Phase decisions: [`product-definition-phase-open-questions.md`](product-definition-phase-open-questions.md). Enterprise-tooling integration options: [`product-definition-integration-options.md`](product-definition-integration-options.md).
 - **Initiative → Feature → Story hierarchy.** Feature is the unit of merge. A high-level solution is agent-drafted and human-signed *before* story breakdown — a **third human gate**, alongside Requirements Sign-off (4) and Merge / Release Approval (10).
 - **Fan-out.** Steps 1–2 plus solution analysis run per initiative (and per feature); steps 3–13 run per story. The existing Design step (5) becomes per-story/per-feature elaboration *within* the signed solution.
 
@@ -160,6 +161,7 @@ Integrating this into the diagram, the step reference table, and the per-agent d
 |---|---|---|
 | [Signal Agent](agents/01-signal-agent.md) | 1. Opportunity Identification | Agent |
 | [Scoping Agent](agents/02-scoping-agent.md) | 2. Prioritization & Scoping | Agent |
+| [Definition Agent](agents/definition-agent.md) | Front-of-flow: L1→L2 product definition (v0.5, not yet numbered) | Agent |
 | [Intake Agent](agents/03-intake-agent.md) | 3. Intake & Requirements Clarification | Agent |
 | [Requirements Sign-off Gate](agents/04-requirements-signoff-gate.md) | 4. Requirements Sign-off | Human Gate |
 | [Design Agent](agents/05-design-agent.md) | 5. Design | Agent |

@@ -44,4 +44,8 @@ Turn a candidate opportunity or direct stakeholder ask into a scoped, prioritize
 ## Handoffs
 
 - **Receives from:** [Signal Agent](01-signal-agent.md) (step 1), or a direct stakeholder ask entering the process independently.
-- **Delivers to:** [Intake Agent](03-intake-agent.md) (step 3), once the product function has made the prioritization decision.
+- **Delivers to:** in the v0.5 front-of-flow model ([`front-of-flow.md`](../front-of-flow.md)), the [Definition Agent](definition-agent.md) — which translates the prioritized ask from L1 to L2 and produces the product definition — once the product function has made the prioritization decision. Per-story [Intake](03-intake-agent.md) (step 3) then runs downstream of solution sign-off, not directly off Scoping. (The master diagram still shows the older Scoping → Intake edge; the front-of-flow expansion is pending integration there.)
+
+## Relationship to the Definition Agent
+
+Scoping and Definition both touch product-shaped work and the boundary is worth stating: Scoping drafts the **decision inputs for prioritization** (effort/ROI, roadmap fit, dependencies) and stops at the prioritization decision. The [Definition Agent](definition-agent.md) picks up an *already-prioritized* ask and does the **L1→L2 translation** (mirror-back plus product-introduced requirements, NFRs, targets, feature breakout). Where they appear to overlap — ROI drafting, OKR alignment — Scoping's version is a rough sizing input to the prioritization call; Definition's is the committed success framing inside a definition that has been prioritized.

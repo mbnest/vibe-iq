@@ -99,5 +99,9 @@ This isn't a new file format requirement on top of `spec.md` — it's a conventi
 
 ## Handoffs
 
-- **Receives from:** [Scoping Agent](02-scoping-agent.md) (step 2).
+- **Receives from:** [Scoping Agent](02-scoping-agent.md) (step 2) in the current master diagram. In the v0.5 front-of-flow model ([`front-of-flow.md`](../front-of-flow.md)), Intake runs **per story**, downstream of the [Definition Agent](definition-agent.md) and solution sign-off — it receives the frozen L2 product definition (and its feature/story slice) as a constraint boundary, not a raw scoped ask. The minimum intake scaffold pre-check and gap routing still apply; the Definition Agent reuses the same scaffold at the front of the flow.
 - **Delivers to:** [Requirements Sign-off Gate](04-requirements-signoff-gate.md) (step 4). Also escalates directly to the appropriate technical or compliance stakeholder mid-process when a gap is routed to them, rather than always resolving gaps through the original submitter first.
+
+## Relationship to the Definition Agent
+
+The [Definition Agent](definition-agent.md) (front-of-flow, L1→L2) produces the **product definition** — initiative-level requirements, NFRs, targets, feature breakout. Intake operates one level down and per story: it resolves *engineering-level* ambiguity within a story's slice of an already-signed definition. NFRs illustrate the split — the Definition Agent states an NFR at the "what" level as product intent (`expected enterprise scale`, `PCI preserved`); Intake refines it into a testable engineering requirement (`p95 < 200ms at 10k rps`) bounded by the signed solution. The provenance vocabulary (`[stated]` / `[default]` / `[inferred]` / `[unresolved]`) and the sibling level tags are shared across both, applied the same way.
