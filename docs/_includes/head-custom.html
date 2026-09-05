@@ -1,0 +1,19 @@
+<!-- Render ```mermaid code blocks on the Pages site (Cayman theme has no native support). -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll("code.language-mermaid").forEach(function (el) {
+      var block = el.closest(".language-mermaid") || el.closest("pre") || el;
+      var out = document.createElement("pre");
+      out.className = "mermaid";
+      out.textContent = el.textContent;
+      block.replaceWith(out);
+    });
+    if (window.mermaid) {
+      mermaid.initialize({ startOnLoad: true, securityLevel: "loose" });
+    }
+  });
+</script>
+<style>
+  .main-content pre.mermaid { background: none; border: 0; padding: 0; text-align: center; }
+</style>
